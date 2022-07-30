@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -14,8 +15,19 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
         vectorDrawables {
             useSupportLibrary = true
+        }
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += mapOf(
+                    "room.schemaLocation" to "$projectDir/schemas",
+                    "room.incremental" to "true",
+                    "room.expandProjection" to "true"
+                )
+            }
         }
     }
 
@@ -65,4 +77,19 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:$1.1.0-beta01")
     debugImplementation("androidx.compose.ui:ui-tooling:1.1.0-beta01")
     debugImplementation("androidx.compose.ui:ui-test-manifest:1.1.0-beta01")
+
+    implementation("androidx.navigation:navigation-compose:2.4.2")
+    implementation("com.jakewharton.timber:timber:5.0.1")
+
+    val roomVersion = "2.4.3"
+
+    implementation("androidx.room:room-runtime:$roomVersion")
+    annotationProcessor("androidx.room:room-compiler:$roomVersion")
+    kapt("androidx.room:room-compiler:$roomVersion")
+
+
+    val koin_version = "3.2.0"
+    implementation("io.insert-koin:koin-core:$koin_version")
+    implementation("io.insert-koin:koin-android:$koin_version")
+    implementation("io.insert-koin:koin-androidx-compose:$koin_version")
 }
