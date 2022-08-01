@@ -11,11 +11,12 @@ import org.koin.core.module.Module
 import org.koin.dsl.module
 
 val repositoryModule: Module = module {
-    single<NoteRepository> { NoteRepositoryImpl() }
+    single<NoteRepository> { NoteRepositoryImpl(get()) }
+    single { get<NoteDatabase>().noteDao }
 }
 
 val viewModelModule = module {
-    viewModel { NoteViewModel() }
+    viewModel { NoteViewModel(get()) }
 }
 
 val databaseModule: Module = module {
