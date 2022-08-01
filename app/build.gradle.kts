@@ -64,7 +64,7 @@ android {
 }
 
 dependencies {
-
+    implementation( "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.5.1")
     implementation("androidx.core:core-ktx:1.8.0")
     implementation("androidx.compose.ui:ui:1.1.0-beta01")
     implementation("androidx.compose.material:material:1.1.0-beta01")
@@ -81,11 +81,11 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.4.2")
     implementation("com.jakewharton.timber:timber:5.0.1")
 
-    val roomVersion = "2.4.3"
-
+    val roomVersion = "2.4.2"
+    implementation( "androidx.room:room-ktx:$roomVersion")
     implementation("androidx.room:room-runtime:$roomVersion")
-    annotationProcessor("androidx.room:room-compiler:$roomVersion")
     kapt("androidx.room:room-compiler:$roomVersion")
+
 
 
     val koin_version = "3.2.0"
