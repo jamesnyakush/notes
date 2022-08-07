@@ -3,7 +3,6 @@ package com.jamesnyakush.notes.ui.screen
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -28,34 +27,36 @@ fun NoteListScreen(
 ) {
     val viewModel = getViewModel<NoteViewModel>()
 
-    Column(
-        modifier = Modifier.fillMaxHeight()
+    Scaffold(
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = {
+                    navController.navigate(Screen.AddNote.route)
+                }
+            ) {
+                Icon(
+                    Icons.Filled.Add,
+                    contentDescription = "Favorite",
+                    modifier = Modifier.size(ButtonDefaults.IconSize)
+                )
+            }
+        }
     ) {
+        Column(
+            modifier = Modifier.fillMaxHeight()
+        ) {
 
-        LazyColumn() {
-            CoroutineScope(Dispatchers.IO).launch {
-                viewModel.getNotes().collect { notes ->
-                    items(items = notes) {
-                        MyNotes(note = it)
+            LazyColumn() {
+                CoroutineScope(Dispatchers.IO).launch {
+                    viewModel.getNotes().collect { notes ->
+                        items(items = notes) {
+                            MyNotes(note = it)
+                        }
                     }
                 }
             }
         }
-
-
-//        FloatingActionButton(
-//            onClick = {
-//                navController.navigate(Screen.AddNote.route)
-//            }
-//        ) {
-//            Icon(
-//                Icons.Filled.Add,
-//                contentDescription = "Favorite",
-//                modifier = Modifier.size(ButtonDefaults.IconSize)
-//            )
-//        }
     }
-
 }
 
 @Composable
@@ -71,13 +72,9 @@ fun MyNotes(note: Note) {
         Column(
             modifier = Modifier.fillMaxWidth()
         ) {
-
-
             Text(modifier = Modifier.padding(8.dp), text = note.title)
 
             Text(modifier = Modifier.padding(8.dp), text = note.description)
-
-
         }
     }
 }
