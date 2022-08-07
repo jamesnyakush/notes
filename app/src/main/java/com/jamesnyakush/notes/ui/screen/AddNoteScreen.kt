@@ -12,13 +12,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.jamesnyakush.notes.data.db.entity.Note
+import com.jamesnyakush.notes.ui.nav.Screen
 import com.jamesnyakush.notes.ui.viewmodel.NoteViewModel
 import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun AddNoteScreen(
-    // navController: NavController
+    navController: NavController
 ) {
 
     val vm = getViewModel<NoteViewModel>()
@@ -72,7 +75,7 @@ fun AddNoteScreen(
                     )
                 )
 
-                // navController.navigate(Screen.Dashboard.route)
+                navController.navigate(Screen.NoteList.route)
             }
         ) {
             Text(text = "Add Note")
@@ -83,5 +86,5 @@ fun AddNoteScreen(
 @Preview
 @Composable
 fun AddNoteScreenPreview() {
-    AddNoteScreen()
+    AddNoteScreen(rememberNavController())
 }
