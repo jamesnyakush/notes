@@ -45,7 +45,6 @@ fun NoteListScreen(
         Column(
             modifier = Modifier.fillMaxHeight()
         ) {
-
             LazyColumn() {
                 CoroutineScope(Dispatchers.IO).launch {
                     viewModel.getNotes().collect { notes ->
@@ -68,7 +67,6 @@ fun MyNotes(note: Note) {
         elevation = 8.dp,
         shape = RoundedCornerShape(8.dp)
     ) {
-
         Column(
             modifier = Modifier.fillMaxWidth()
         ) {

@@ -16,8 +16,6 @@ class NoteViewModel constructor(
         repository.upsertNote(note = note)
     }
 
-    //var fetchNoteOffline = repository.getNotes().
-
     fun getNotes(): Flow<List<Note>> {
         return repository.getNotes()
     }
