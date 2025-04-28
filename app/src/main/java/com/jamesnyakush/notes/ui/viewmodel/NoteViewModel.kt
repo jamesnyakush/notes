@@ -4,10 +4,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jamesnyakush.notes.data.db.entity.Note
 import com.jamesnyakush.notes.data.repository.NoteRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 
-class NoteViewModel constructor(
+class NoteViewModel(
     private val repository: NoteRepository
 ) : ViewModel() {
 
@@ -16,7 +18,5 @@ class NoteViewModel constructor(
         repository.upsertNote(note = note)
     }
 
-    fun getNotes(): Flow<List<Note>> {
-        return repository.getNotes()
-    }
+    val notes = repository.getNotes().flowOn(Dispatchers.IO)
 }
