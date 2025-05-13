@@ -44,6 +44,7 @@ Coming Soon
 * CI/CD
     * Github Actions
 
+## License
 ```
 Copyright (c) 2025 James Nyakundi
 
